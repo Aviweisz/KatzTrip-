@@ -3,132 +3,500 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katz Family Israel Tour 2025</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>Katz Family Israel Tour</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f2f5; /* A slightly cooler light gray */
+        }
+        .font-lora {
+            font-family: 'Lora', serif;
+        }
+        .flyer-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+        .header-container {
+            height: 350px;
+            overflow: hidden;
+            position: relative;
+        }
+        .header-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1594304449335-9a5261025557?auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            color: #ffffff;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .itinerary-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .itinerary-item.open {
+             box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+        .day-header {
+            cursor: pointer;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            transition: background-color 0.3s ease;
+        }
+        .day-header:hover {
+            background-color: #f9fafb;
+        }
+        .day-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), padding 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #fafafa;
+            padding: 0 1.5rem;
+        }
+        .itinerary-item.open .day-details {
+            padding: 1.5rem;
+        }
+        .chevron-icon {
+            transition: transform 0.5s ease;
+        }
+        .itinerary-item.open .chevron-icon {
+            transform: rotate(90deg);
+        }
+        .schedule-entry {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .schedule-entry:last-child {
+            border-bottom: none;
+        }
+        .schedule-icon {
+            flex-shrink: 0;
+            margin-right: 1rem;
+            color: #fbbf24; /* Amber */
+        }
+        .schedule-time {
+            width: 6rem;
+            flex-shrink: 0;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+        .schedule-details {
+            flex-grow: 1;
+        }
+        .location-link {
+            text-decoration: none;
+            color: #059669; /* Emerald */
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .location-link:hover {
+            color: #047857;
+            text-decoration: underline;
+        }
+        .add-to-calendar {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-left: 0.5rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .add-to-calendar:hover {
+            color: #1f2937;
+        }
+        .day-photo {
+            border-radius: 12px;
+            margin-top: 1rem;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .key-info-section {
+            background-color: #1f2937; /* Dark Slate */
+            color: #f3f4f6;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+        }
+        .key-info-header {
+             padding: 1rem 1.5rem;
+             cursor: pointer;
+        }
+        .key-info-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), padding 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 1.5rem;
+        }
+        .key-info-content.open {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+        .info-block {
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+        .info-block:last-child {
+            margin-bottom: 0;
+        }
+    </style>
 </head>
-<body>
+<body class="p-2 sm:p-4">
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Katz Family Israel Tour</h1>
-            <p>July 14 – 21, 2025</p>
+    <div class="flyer-container">
+        <!-- Header -->
+        <div class="header-container">
+            <div class="header-bg">
+                <h1 class="font-lora text-4xl md:text-6xl font-bold tracking-tight text-shadow-lg">Katz Family Israel Tour</h1>
+                <p class="mt-3 text-lg md:text-xl font-light">July 14–21, 2025</p>
+            </div>
         </div>
-    </header>
 
-    <nav class="sticky-nav">
-        <a href="#monday">Monday</a>
-        <a href="#tuesday">Tuesday</a>
-        <a href="#wednesday">Wednesday</a>
-        <a href="#thursday">Thursday</a>
-        <a href="#friday">Friday</a>
-        <a href="#shabbat">Shabbat</a>
-        <a href="#sunday">Sunday</a>
-        <a href="#departure">Departure</a>
-    </nav>
+        <!-- Main Content -->
+        <div class="p-4 md:p-8">
+            <!-- Weather Snippet -->
+            <div id="weather-widget" class="flex items-center justify-center bg-blue-50 border border-blue-200 text-blue-800 rounded-xl p-4 mb-6 text-center">
+                <p>Loading weather for Jerusalem...</p>
+            </div>
+            
+            <!-- Key Information Section -->
+            <div id="key-info" class="key-info-section">
+                <div class="key-info-header flex items-center justify-between" onclick="toggleAccordion('key-info-content', this)">
+                    <div class="flex items-center">
+                        <i data-lucide="key-round" class="mr-3"></i>
+                        <h3 class="text-xl font-bold">Key Trip Information</h3>
+                    </div>
+                    <i data-lucide="chevron-down" class="chevron-icon transition-transform"></i>
+                </div>
+                <div id="key-info-content" class="key-info-content">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="info-block">
+                            <h4 class="font-bold text-lg mb-2 flex items-center"><i data-lucide="plane" class="mr-2 h-5 w-5"></i>Flights</h4>
+                            <p><strong>Confirmation:</strong> XYZ123</p>
+                            <p><strong>Airline:</strong> El Al</p>
+                            <p><strong>Departs:</strong> JFK, July 13, 10:50 PM</p>
+                        </div>
+                        <div class="info-block">
+                            <h4 class="font-bold text-lg mb-2 flex items-center"><i data-lucide="car" class="mr-2 h-5 w-5"></i>Rental Car</h4>
+                            <p><strong>Company:</strong> Avis</p>
+                            <p><strong>Confirmation:</strong> 987654</p>
+                            <p><strong>Pickup:</strong> Ben Gurion Airport (TLV)</p>
+                        </div>
+                        <div class="info-block">
+                            <h4 class="font-bold text-lg mb-2 flex items-center"><i data-lucide="home" class="mr-2 h-5 w-5"></i>Accommodation</h4>
+                            <p><strong>Name:</strong> Jerusalem Estates</p>
+                            <p><strong>Address:</strong> [Full Address Here]</p>
+                            <p><strong>Contact:</strong> +972-2-123-4567</p>
+                        </div>
+                        <div class="info-block">
+                            <h4 class="font-bold text-lg mb-2 flex items-center"><i data-lucide="phone" class="mr-2 h-5 w-5"></i>Emergency Contacts</h4>
+                            <p><strong>Tour Guide:</strong> [Name], [Number]</p>
+                            <p><strong>Local Contact:</strong> [Name], [Number]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <main class="itinerary-container">
-        <!-- Monday -->
-        <section id="monday" class="day-card">
-            <h2><span class="day-badge coral">Monday</span> Arrival in Jerusalem</h2>
-            <ul class="schedule">
-                <li><span class="time">2:25 PM</span> Arrive at TLV Airport</li>
-                <li><span class="time">3:30 PM</span> Pick up rental car at <a href="https://www.google.com/maps/search/?api=1&query=Avis+Ben+Gurion+Airport" target="_blank" class="pill-button">Avis</a></li>
-                <li><span class="time">5:00 PM</span> Settle in at <a href="https://www.google.com/maps/search/?api=1&query=Jerusalem+Estates" target="_blank" class="pill-button">Jerusalem Estates</a></li>
-                <li><span class="time">7:00 PM</span> Dinner: Falafel/Shawarma</li>
-                <li><span class="time">8:00 PM</span> Grocery Shopping</li>
-                <li><span class="time">9:30 PM</span> Visit the <a href="https://www.google.com/maps/search/?api=1&query=Western+Wall+Jerusalem" target="_blank" class="pill-button">Kotel (Western Wall)</a></li>
-            </ul>
-        </section>
+            <!-- Itinerary List -->
+            <div class="space-y-4" id="itinerary-list">
+                <!-- Itinerary items will be injected here by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="bg-gray-100 p-6 text-center text-gray-600">
+            <p class="font-bold text-gray-800">Have a Wonderful Trip!</p>
+            <p class="text-sm mt-1">Your journey, perfectly planned.</p>
+        </div>
+    </div>
 
-        <!-- Tuesday -->
-        <section id="tuesday" class="day-card">
-            <h2><span class="day-badge navy">Tuesday</span> Jerusalem & Bar Mitzvah</h2>
-            <ul class="schedule">
-                <li><span class="time">11:00 AM</span> Shuk Tour in <a href="https://www.google.com/maps/search/?api=1&query=Mahane+Yehuda+Market+Jerusalem" target="_blank" class="pill-button">Mahane Yehuda</a> / Geula</li>
-                <li><span class="time">12:00 PM</span> See the <a href="https://www.google.com/maps/search/?api=1&query=Chords+Bridge+Jerusalem" target="_blank" class="pill-button">Train on the Bridge</a></li>
-                <li><span class="time">1:00 PM</span> Lunch with Meira at <a href="https://www.google.com/maps/search/?api=1&query=Waffle+Bar+Ramat+Eshkol" target="_blank" class="pill-button">Waffle Bar</a></li>
-                <li><span class="time">1:00 PM</span> Visit <a href="https://www.google.com/maps/search/?api=1&query=Galita+Chocolate+Farm+Degania+Bet" target="_blank" class="pill-button">Galita Chocolate Factory</a></li>
-                <li><span class="time">5:45 PM</span> Meet Rabbi Keleman at <a href="https://www.google.com/maps/search/?api=1&query=Zerakh+Barnett+St+10+Jerusalem" target="_blank" class="pill-button">Zerakh Barnett St 10</a></li>
-                <li><span class="time">8:30 PM</span> Dinner at Mevaseret Bar Mitzvah</li>
-                <li><span class="time">9:30 PM</span> Visit <a href="https://www.google.com/maps/search/?api=1&query=Western+Wall+Jerusalem" target="_blank" class="pill-button">Kotel</a> / <a href="https://www.google.com/maps/search/?api=1&query=Rachel's+Tomb" target="_blank" class="pill-button">Kever Rochel</a></li>
-            </ul>
-        </section>
+    <script>
+        // --- DATA ---
+        const itineraryData = [
+            {
+                day: "Monday, July 14",
+                title: "Arrival in Jerusalem",
+                photo: "https://placehold.co/600x400/3a2e25/fefce8?text=Jerusalem+Arrival",
+                schedule: [
+                    { time: "2:25 PM", desc: "Arrive at TLV Airport", icon: "plane-takeoff", location: "Ben Gurion Airport" },
+                    { time: "3:30 PM", desc: "Pick up rental car at Avis", icon: "car", location: "Avis Ben Gurion Airport" },
+                    { time: "5:00 PM", desc: "Settle in at Jerusalem Estates", icon: "home", location: "Jerusalem Estates" },
+                    { time: "7:00 PM", desc: "Dinner: Falafel/Shawarma", icon: "utensils-crossed" },
+                    { time: "8:00 PM", desc: "Grocery Shopping", icon: "shopping-cart" },
+                    { time: "9:30 PM", desc: "Visit the Kotel (Western Wall)", icon: "star-of-david", location: "Western Wall Jerusalem" }
+                ]
+            },
+            {
+                day: "Tuesday, July 15",
+                title: "Jerusalem & Bar Mitzvah",
+                photo: "https://placehold.co/600x400/fbbf24/1f2937?text=Bar+Mitzvah+Day",
+                schedule: [
+                    { time: "11:00 AM", desc: "Shuk Tour in Mahane Yehuda / Geula", icon: "shopping-cart", location: "Mahane Yehuda Market Jerusalem" },
+                    { time: "12:00 PM", desc: "See the Train on the Bridge", icon: "train-track", location: "Chords Bridge Jerusalem" },
+                    { time: "1:00 PM", desc: "Lunch with Meira at Waffle Bar", icon: "utensils-crossed", location: "Waffle Bar Ramat Eshkol" },
+                    { time: "5:45 PM", desc: "Meet Rabbi Keleman", icon: "user-check" },
+                    { time: "8:30 PM", desc: "Dinner at Mevaseret Bar Mitzvah", icon: "party-popper", event: { title: "Bar Mitzvah Dinner", start: "20250715T203000", end: "20250715T223000" } },
+                    { time: "9:30 PM", desc: "Visit Kotel / Kever Rochel", icon: "star-of-david", location: "Western Wall Jerusalem" }
+                ]
+            },
+            {
+                day: "Wednesday, July 16",
+                title: "Old City & Tower of David",
+                photo: "https://images.unsplash.com/photo-1561023269-14345e4333a8?auto=format&fit=crop&w=800&q=80",
+                schedule: [
+                    { time: "9:00 AM", desc: "Bar Mitzvah at the Kotel", icon: "star-of-david", location: "Western Wall Jerusalem", event: { title: "Bar Mitzvah Ceremony", start: "20250716T090000", end: "20250716T100000" } },
+                    { time: "10:00 AM", desc: "3D Tour in the Old City", icon: "glasses" },
+                    { time: "11:00 AM", desc: "Breakfast in the Old City", icon: "utensils-crossed" },
+                    { time: "6:00 PM", desc: "Dinner at Old Train Station or Mamilla", icon: "utensils-crossed", location: "First Station Jerusalem" },
+                    { time: "8:30 PM", desc: "Light Show at the Tower of David", icon: "sparkles", location: "Tower of David Light Show", event: { title: "Tower of David Light Show", start: "20250716T203000", end: "20250716T213000" } },
+                ]
+            },
+             {
+                day: "Thursday, July 17",
+                title: "Journey to the North",
+                photo: "https://images.unsplash.com/photo-1593223658249-5eff5449c5a7?auto=format&fit=crop&w=800&q=80",
+                schedule: [
+                    { time: "9:00 AM", desc: "Depart for the North", icon: "car" },
+                    { time: "11:00 AM", desc: "Explore Rosh Hanikra Grottoes", icon: "mountain", location: "Rosh HaNikra Grottoes" },
+                    { time: "1:45 PM", desc: "Visit Kever Rashbi in Meron", icon: "star-of-david", location: "Tomb of Rabbi Shimon bar Yochai Meron" },
+                    { time: "4:00 PM", desc: "Experience Kfar Kedem", icon: "tent", location: "Kfar Kedem" },
+                    { time: "7:00 PM", desc: "Dinner at Decks Restaurant", icon: "utensils-crossed", location: "Decks Restaurant Tiberias" },
+                    { time: "9:00 PM", desc: "Depart for Jerusalem", icon: "car" }
+                ]
+            },
+            {
+                day: "Friday, July 18",
+                title: "Shabbat Preparations",
+                photo: "https://images.unsplash.com/photo-1599458386310-345155716491?auto=format&fit=crop&w=800&q=80",
+                schedule: [
+                    { time: "10:00 AM", desc: "Visit Kever Rochel or ToMo Candy", icon: "map-pin", location: "Rachel's Tomb" },
+                    { time: "12:30 PM", desc: "Explore Shuk Mahane Yehuda", icon: "shopping-cart", location: "Mahane Yehuda Market" },
+                    { time: "1:00 PM", desc: "Walk through Geula/Meah Shearim", icon: "footprints", location: "Geula Jerusalem" },
+                    { time: "5:30 PM", desc: "Get Ready for Shabbos", icon: "sparkles" }
+                ]
+            },
+            {
+                day: "Saturday, July 19",
+                title: "Shabbat in Jerusalem",
+                photo: "https://placehold.co/600x400/1f2937/fde68a?text=Shabbat+Shalom",
+                isRestDay: true,
+                schedule: []
+            },
+            {
+                day: "Sunday, July 20",
+                title: "Desert Adventure & Dead Sea",
+                photo: "https://images.unsplash.com/photo-1541623642885-ce395c338e55?auto=format&fit=crop&w=800&q=80",
+                schedule: [
+                    { time: "9:45 AM", desc: "Visit Mitzpe Yericho", icon: "mountain", location: "Mitzpe Yeriho" },
+                    { time: "10:00 AM", desc: "Jeeping Adventure", icon: "truck" },
+                    { time: "12:30 PM", desc: "Camel Ride", icon: "camel" },
+                    { time: "3:30 PM", desc: "Float in the Dead Sea", icon: "waves", location: "Dead Sea" },
+                    { time: "8:00 PM", desc: "Dinner at Pit Master (Reservation)", icon: "utensils-crossed", location: "Pitmaster Jerusalem", event: { title: "Dinner at Pit Master", start: "20250720T200000", end: "20250720T220000" } }
+                ]
+            },
+            {
+                day: "Monday, July 21",
+                title: "Final Day & Departure",
+                photo: "https://placehold.co/600x400/374151/e5e7eb?text=Safe+Travels",
+                schedule: [
+                    { time: "5:00 PM", desc: "Final visit to the Kotel", icon: "star-of-david", location: "Western Wall Jerusalem" },
+                    { time: "8:30 PM", desc: "Depart for the Airport", icon: "car" },
+                    { time: "12:30 AM", desc: "Depart from TLV Airport", icon: "plane-landing", location: "Ben Gurion Airport" }
+                ]
+            }
+        ];
 
-        <!-- Wednesday -->
-        <section id="wednesday" class="day-card">
-            <h2><span class="day-badge coral">Wednesday</span> Old City & Tower of David</h2>
-            <ul class="schedule">
-                <li><span class="time">9:00 AM</span> Bar Mitzvah at the <a href="https://www.google.com/maps/search/?api=1&query=Western+Wall+Jerusalem" target="_blank" class="pill-button">Kotel</a></li>
-                <li><span class="time">10:00 AM</span> 3D Tour</li>
-                <li><span class="time">11:00 AM</span> Breakfast in the Old City</li>
-                <li><span class="time">6:00 PM</span> Dinner at the <a href="https://www.google.com/maps/search/?api=1&query=First+Station+Jerusalem" target="_blank" class="pill-button">Old Train Station</a> or <a href="https://www.google.com/maps/search/?api=1&query=Mamilla+Mall+Jerusalem" target="_blank" class="pill-button">Mamilla</a></li>
-                <li><span class="time">8:30 PM</span> Light Show at the <a href="https://www.google.com/maps/search/?api=1&query=Tower+of+David+Light+Show" target="_blank" class="pill-button">Tower of David</a></li>
-                <li><span class="time">9:15 PM</span> Visit the <a href="https://www.google.com/maps/search/?api=1&query=Western+Wall+Jerusalem" target="_blank" class="pill-button">Kotel</a></li>
-            </ul>
-        </section>
+        // --- FUNCTIONS ---
 
-        <!-- Thursday -->
-        <section id="thursday" class="day-card">
-            <h2><span class="day-badge navy">Thursday</span> Journey to the North</h2>
-             <ul class="schedule">
-                <li><span class="time">9:00 AM</span> Depart for the North</li>
-                <li><span class="time">11:00 AM</span> Explore <a href="https://www.google.com/maps/search/?api=1&query=Rosh+HaNikra+Grottoes" target="_blank" class="pill-button">Rosh Hanikra Grottoes</a></li>
-                <li><span class="time">1:45 PM</span> Visit <a href="https://www.google.com/maps/search/?api=1&query=Tomb+of+Rabbi+Shimon+bar+Yochai+Meron" target="_blank" class="pill-button">Kever Rashbi in Meron</a></li>
-                <li><span class="time">4:00 PM</span> Experience <a href="https://www.google.com/maps/search/?api=1&query=Kfar+Kedem" target="_blank" class="pill-button">Kfar Kedem</a></li>
-                <li><span class="time">6:30 PM</span> Visit <a href="https://www.google.com/maps/search/?api=1&query=Tomb+of+Ramchal+Tiberias" target="_blank" class="pill-button">Kever of the Ramchal</a></li>
-                <li><span class="time">7:00 PM</span> Dinner at <a href="https://www.google.com/maps/search/?api=1&query=Decks+Restaurant+Tiberias" target="_blank" class="pill-button">Decks Restaurant</a> in Tiberias</li>
-                <li><span class="time">9:00 PM</span> Depart for Jerusalem</li>
-            </ul>
-        </section>
+        function toggleAccordion(contentId, headerElement) {
+            const content = document.getElementById(contentId);
+            const item = content.closest('.itinerary-item, .key-info-section');
+            const icon = headerElement.querySelector('.chevron-icon');
 
-        <!-- Friday -->
-        <section id="friday" class="day-card">
-            <h2><span class="day-badge coral">Friday</span> Shabbat Preparations</h2>
-            <ul class="schedule">
-                <li><span class="time">10:00 AM</span> Visit <a href="https://www.google.com/maps/search/?api=1&query=Rachel's+Tomb" target="_blank" class="pill-button">Kever Rochel</a>, <a href="https://www.google.com/maps/search/?api=1&query=Beit+Shemesh+Cemetery" target="_blank" class="pill-button">Bet Shemesh Cemetery</a>, or <a href="https://www.google.com/maps/search/?api=1&query=Tomo+Candy+Israel" target="_blank" class="pill-button">ToMo Candy Factory</a></li>
-                <li><span class="time">12:30 PM</span> Explore <a href="https://www.google.com/maps/search/?api=1&query=Mahane+Yehuda+Market" target="_blank" class="pill-button">Shuk Mahane Yehuda</a></li>
-                <li><span class="time">1:00 PM</span> Walk through <a href="https://www.google.com/maps/search/?api=1&query=Geula+Jerusalem" target="_blank" class="pill-button">Geula/Meah Shearim</a></li>
-                <li><span class="time">5:30 PM</span> Get Ready for Shabbos</li>
-            </ul>
-        </section>
+            if (item.classList.contains('open')) {
+                content.style.maxHeight = '0';
+                item.classList.remove('open');
+            } else {
+                // Close other accordions
+                const openItems = document.querySelectorAll('.itinerary-item.open, .key-info-section.open');
+                openItems.forEach(openItem => {
+                    if (openItem !== item) {
+                        openItem.classList.remove('open');
+                        openItem.querySelector('.day-details, .key-info-content').style.maxHeight = '0';
+                    }
+                });
+                
+                content.style.maxHeight = content.scrollHeight + 'px';
+                item.classList.add('open');
+            }
+        }
+        
+        function createCalendarLink(event) {
+            const { title, start, end, location } = event;
+            const startDate = `${start.slice(0,8)}T${start.slice(8)}`;
+            const endDate = `${end.slice(0,8)}T${end.slice(8)}`;
 
-        <!-- Shabbat -->
-        <section id="shabbat" class="day-card">
-            <h2><span class="day-badge navy">Saturday</span> Shabbat in Jerusalem</h2>
-            <p class="shabbat-message">Shabbat Shalom! A day of rest and peace.</p>
-        </section>
+            let icsMSG = "BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\n";
+            icsMSG += `URL:${document.URL}\n`;
+            icsMSG += `DTSTART:${startDate}Z\n`;
+            icsMSG += `DTEND:${endDate}Z\n`;
+            icsMSG += `SUMMARY:${title}\n`;
+            if (location) {
+                icsMSG += `LOCATION:${location}\n`;
+            }
+            icsMSG += `DESCRIPTION:Event from Katz Family Israel Tour Itinerary.\n`;
+            icsMSG += "END:VEVENT\nEND:VCALENDAR";
+            
+            return `data:text/calendar;charset=utf8,${encodeURIComponent(icsMSG)}`;
+        }
 
-        <!-- Sunday -->
-        <section id="sunday" class="day-card">
-            <h2><span class="day-badge coral">Sunday</span> Desert Adventure & Dead Sea</h2>
-            <ul class="schedule">
-                <li><span class="time">9:45 AM</span> Visit <a href="https://www.google.com/maps/search/?api=1&query=Mitzpe+Yeriho" target="_blank" class="pill-button">Mitzpe Yericho</a></li>
-                <li><span class="time">10:00 AM</span> Jeeping Adventure</li>
-                <li><span class="time">12:30 PM</span> Camel Ride</li>
-                <li><span class="time">1:45 PM</span> Visit <a href="https://www.google.com/maps/search/?api=1&query=Masada+National+Park" target="_blank" class="pill-button">Masada</a> (optional)</li>
-                <li><span class="time">3:30 PM</span> Float in the <a href="https://www.google.com/maps/search/?api=1&query=Dead+Sea" target="_blank" class="pill-button">Dead Sea</a></li>
-                <li><span class="time">8:00 PM</span> Dinner at <a href="https://www.google.com/maps/search/?api=1&query=Pitmaster+Jerusalem" target="_blank" class="pill-button">Pit Master</a> (<a href="https://www.google.com/search?q=Pitmaster+Jerusalem+reservation" target="_blank" class="pill-button">Reservation</a>)</li>
-                <li><span class="time">11:00 PM</span> Optional visit to the <a href="https://www.google.com/maps/search/?api=1&query=Western+Wall+Jerusalem" target="_blank" class="pill-button">Kotel</a></li>
-            </ul>
-        </section>
+        function renderItinerary() {
+            const list = document.getElementById('itinerary-list');
+            list.innerHTML = ''; // Clear existing list
+            
+            itineraryData.forEach((item, index) => {
+                const dayId = `day-${index}`;
 
-        <!-- Departure -->
-        <section id="departure" class="day-card">
-            <h2><span class="day-badge navy">Monday</span> Final Day & Departure</h2>
-            <ul class="schedule">
-                <li><span class="time">5:00 PM</span> Final visit to the <a href="https://www.google.com/maps/search/?api=1&query=Western+Wall+Jerusalem" target="_blank" class="pill-button">Kotel</a></li>
-                <li><span class="time">8:30 PM</span> Depart for the Airport</li>
-                <li><span class="time">12:30 AM</span> Depart from <a href="https://www.google.com/maps/search/?api=1&query=Ben+Gurion+Airport" target="_blank" class="pill-button">TLV Airport</a></li>
-            </ul>
-        </section>
-    </main>
+                const scheduleHtml = item.schedule.map(entry => {
+                    const locationLink = entry.location ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(entry.location)}" target="_blank" class="location-link">${entry.location}</a>` : '';
+                    const calendarLink = entry.event ? `<a href="${createCalendarLink({...entry.event, location: entry.location})}" download="${entry.event.title}.ics" class="add-to-calendar"><i data-lucide="calendar-plus" class="h-4 w-4 mr-1"></i>Add</a>` : '';
+                    const descText = entry.location ? entry.desc.replace(entry.location, '') : entry.desc;
 
-    <footer>
-        <p>Your journey, perfectly planned.</p>
-    </footer>
+                    return `
+                        <div class="schedule-entry">
+                            <i data-lucide="${entry.icon || 'circle'}" class="schedule-icon h-5 w-5 mt-1"></i>
+                            <div class="schedule-time">${entry.time}</div>
+                            <div class="schedule-details">
+                                <p>${descText} ${locationLink} ${calendarLink}</p>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
 
+                const contentHtml = item.isRestDay 
+                    ? `<div class="text-center py-8"><h3 class="text-2xl font-lora">Shabbat Shalom!</h3><p class="text-gray-600 mt-2">A day of rest and peace.</p></div>`
+                    : `<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                           <div class="md:col-span-3">
+                               <h4 class="font-bold text-lg mb-2">Schedule</h4>
+                               <div class="space-y-2">${scheduleHtml}</div>
+                           </div>
+                           <div class="md:col-span-2">
+                               <h4 class="font-bold text-lg mb-2">Highlights</h4>
+                               <img src="${item.photo}" alt="${item.title}" class="day-photo" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found';">
+                           </div>
+                       </div>`;
+
+                const itemHtml = `
+                    <div class="itinerary-item" id="${dayId}-item">
+                        <div class="day-header" onclick="toggleAccordion('${dayId}-details', this)">
+                            <div>
+                                <p class="font-semibold text-gray-500 text-sm">${item.day}</p>
+                                <h3 class="text-xl font-bold text-gray-800">${item.title}</h3>
+                            </div>
+                            <i data-lucide="chevron-right" class="chevron-icon"></i>
+                        </div>
+                        <div class="day-details" id="${dayId}-details">
+                            ${contentHtml}
+                        </div>
+                    </div>
+                `;
+                list.innerHTML += itemHtml;
+            });
+
+            lucide.createIcons(); // Render all icons
+        }
+
+        async function fetchWeather() {
+            const widget = document.getElementById('weather-widget');
+            const lat = 31.7683; // Jerusalem latitude
+            const lon = 35.2137; // Jerusalem longitude
+            // NOTE: This is a free, open-source API without keys.
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=Asia%2FJerusalem`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Weather data not available.');
+                const data = await response.json();
+                
+                const currentTemp = Math.round(data.current.temperature_2m);
+                const maxTemp = Math.round(data.daily.temperature_2m_max[0]);
+                const minTemp = Math.round(data.daily.temperature_2m_min[0]);
+                const weatherDesc = getWeatherDescription(data.current.weather_code);
+
+                widget.innerHTML = `
+                    <div class="flex items-center">
+                        <i data-lucide="${weatherDesc.icon}" class="h-8 w-8 mr-4"></i>
+                        <div>
+                            <p class="font-bold">Jerusalem Weather: ${currentTemp}°F and ${weatherDesc.text}</p>
+                            <p class="text-sm">Today's High: ${maxTemp}°F / Low: ${minTemp}°F</p>
+                        </div>
+                    </div>
+                `;
+                lucide.createIcons();
+
+            } catch (error) {
+                console.error("Weather fetch error:", error);
+                widget.innerHTML = `<p>Could not load current weather data.</p>`;
+            }
+        }
+
+        function getWeatherDescription(code) {
+            const descriptions = {
+                0: { text: "Clear skies", icon: "sun" },
+                1: { text: "Mainly clear", icon: "sun" },
+                2: { text: "Partly cloudy", icon: "cloud-sun" },
+                3: { text: "Overcast", icon: "cloud" },
+                45: { text: "Fog", icon: "cloud-fog" },
+                48: { text: "Depositing rime fog", icon: "cloud-fog" },
+                51: { text: "Light drizzle", icon: "cloud-drizzle" },
+                53: { text: "Moderate drizzle", icon: "cloud-drizzle" },
+                55: { text: "Dense drizzle", icon: "cloud-drizzle" },
+                61: { text: "Slight rain", icon: "cloud-rain" },
+                63: { text: "Moderate rain", icon: "cloud-rain" },
+                65: { text: "Heavy rain", icon: "cloud-rain-wind" },
+                80: { text: "Slight rain showers", icon: "cloud-hail" },
+                81: { text: "Moderate rain showers", icon: "cloud-hail" },
+                82: { text: "Violent rain showers", icon: "cloud-hail" },
+            };
+            return descriptions[code] || { text: "Clear", icon: "sun" };
+        }
+
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderItinerary();
+            fetchWeather();
+            
+            // Auto-open the first day
+            const firstItem = document.querySelector('.itinerary-item');
+            if(firstItem) {
+                toggleAccordion('day-0-details', firstItem.querySelector('.day-header'));
+            }
+        });
+
+    </script>
 </body>
 </html>
