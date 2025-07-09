@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +9,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f8f9fa; /* Light Gray */
+            background: #fdfbf7; /* Off-white, sand color */
         }
         .font-lora {
             font-family: 'Lora', serif;
@@ -25,7 +24,6 @@
             border: 1px solid #e5e7eb;
         }
         .header-bg {
-            /* Updated background to a Western Wall sunrise image */
             background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1594304449335-9a5261025557?auto=format&fit=crop&w=1740&q=80');
             background-size: cover;
             background-position: center;
@@ -34,11 +32,12 @@
         .itinerary-item {
             transition: all 0.3s ease;
             border: 1px solid #e5e7eb;
+            background-color: #f0f9ff; /* Added light sky blue color */
         }
         .itinerary-item:hover {
             transform: scale(1.02);
             box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-            border-color: #fbbf24; /* Amber color for hover */
+            border-color: #38bdf8; /* Sky Blue for hover */
         }
         .modal {
             display: none;
@@ -63,8 +62,8 @@
             overflow: hidden;
         }
         .modal-body {
-            background-color: #3a2e25; /* Dark Brown for Modal */
-            color: #fefce8; /* Light Yellow Text */
+            background-color: #4A4A4A; /* Dark Slate Gray */
+            color: #f0f9ff; /* Light Blue Text */
             padding: 1.5rem;
             height: 100%;
             overflow-y: auto;
@@ -88,20 +87,13 @@
         }
         .location-link {
             text-decoration: none;
-            color: #fcd34d; /* Amber color for links */
+            color: #7dd3fc; /* Light Sky Blue */
             font-weight: 600;
             transition: color 0.2s;
         }
         .location-link:hover {
             color: #ffffff;
             text-decoration: underline;
-        }
-        .location-link svg {
-            display: inline-block;
-            width: 1em;
-            height: 1em;
-            margin-right: 4px;
-            vertical-align: -0.125em;
         }
         .schedule-entry {
             display: flex;
@@ -117,7 +109,7 @@
             flex-shrink: 0;
             font-weight: 700;
             font-size: 0.9rem;
-            color: #fde68a; /* Lighter Amber */
+            color: #bae6fd; /* Lighter Sky Blue */
             margin-bottom: 0.25rem;
         }
         .schedule-details {
