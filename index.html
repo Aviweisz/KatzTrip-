@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katz Israel Itinerary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa; /* Light Gray */
+        }
+        .font-lora {
+            font-family: 'Lora', serif;
+        }
+        .flyer-container {
+            max-width: 700px;
+            margin: 2rem auto;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+        .header-bg {
+            /* Updated background to a Western Wall sunrise image */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1594304449335-9a5261025557?auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+        }
+        .itinerary-item {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        .itinerary-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border-color: #fbbf24; /* Amber color for hover */
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-content {
+            margin: 5% auto;
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            position: relative;
+            animation: slideIn 0.4s ease;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .modal-body {
+            background-color: #3a2e25; /* Dark Brown for Modal */
+            color: #fefce8; /* Light Yellow Text */
+            padding: 1.5rem;
+            height: 100%;
+            overflow-y: auto;
+            box-sizing: border-box;
+            -webkit-overflow-scrolling: touch;
+        }
+        .close-btn {
+            color: #d1d5db;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+            z-index: 10;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        .close-btn:hover {
+            color: #fff;
+        }
+        .location-link {
+            text-decoration: none;
+            color: #fcd34d; /* Amber color for links */
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .location-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .location-link svg {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            margin-right: 4px;
+            vertical-align: -0.125em;
+        }
+        .schedule-entry {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .schedule-entry:last-child {
+            border-bottom: none;
+        }
+        .schedule-time {
+            flex-shrink: 0;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #fde68a; /* Lighter Amber */
+            margin-bottom: 0.25rem;
+        }
+        .schedule-details {
+            flex-grow: 1;
+        }
+        @media (min-width: 640px) {
+            .modal-body {
+                padding: 2.5rem;
+            }
+            .schedule-entry {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            .schedule-time {
+                width: 6rem;
+                margin-bottom: 0;
+            }
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    </style>
+</head>
+<body class="p-2 sm:p-4">
+
+    <div class="flyer-container">
+        <!-- Header -->
+        <div class="header-bg p-6 md:p-10 text-center">
+            <h1 class="font-lora text-3xl md:text-5xl font-bold tracking-tight text-shadow-lg">Katz Family Israel Tour</h1>
+            <p class="mt-3 text-base md:text-lg font-light">July 14–21, 2025</p>
+        </div>
+
+        <!-- Itinerary List -->
+        <div class="p-4 md:p-8">
+            <div class="space-y-4">
+                <!-- Day 1: Monday -->
+                <div class="itinerary-item p-4 rounded-xl cursor-pointer flex items-center space-x-4" onclick="openModal('day1Modal')">
+                    <div class="flex-1">
+                        <p class="font-semibold text-gray-500 text-xs sm:text-sm">Monday, July 14</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-800">Arrival in Jerusalem</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <!-- Day 2: Tuesday -->
+                <div class="itinerary-item p-4 rounded-xl cursor-pointer flex items-center space-x-4" onclick="openModal('day2Modal')">
+                    <div class="flex-1">
+                        <p class="font-semibold text-gray-500 text-xs sm:text-sm">Tuesday, July 15</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-800">Jerusalem & Bar Mitzvah</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <!-- Day 3: Wednesday -->
+                <div class="itinerary-item p-4 rounded-xl cursor-pointer flex items-center space-x-4" onclick="openModal('day3Modal')">
+                    <div class="flex-1">
+                        <p class="font-semibold text-gray-500 text-xs sm:text-sm">Wednesday, July 16</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-800">Old City & Tower of David</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <!-- Day 4: Thursday -->
+                <div class="itinerary-item p-4 rounded-xl cursor-pointer flex items-center space-x-4" onclick="openModal('day4Modal')">
+                    <div class="flex-1">
+                        <p class="font-semibold text-gray-500 text-xs sm:text-sm">Thursday, July 17</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-800">Journey to the North</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <!-- Day 5: Friday -->
+                <div class="itinerary-item p-4 rounded-xl cursor-pointer flex items-center space-x-4" onclick="openModal('day5Modal')">
+                    <div class="flex-1">
+                        <p class="font-semibold text-gray-500 text-xs sm:text-sm">Friday, July 18</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-800">Shabbat Preparations</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <!-- Day 6: Shabbat -->
+                <div class="itinerary-item p-4 rounded-xl cursor-pointer flex items-center space-x-4" onclick="openModal('day6Modal')">
+                    <div class="flex-1">
+                        <p class="font-semibold text-gray-500 text-xs sm:text-sm">Saturday, July 19</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-800">Shabbat in Jerusalem</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <!-- Day 7: Sunday -->
+                <div class="itinerary-item p-4 rounded-xl cursor-pointer flex items-center space-x-4" onclick="openModal('day7Modal')">
+                    <div class="flex-1">
+                        <p class="font-semibold text-gray-500 text-xs sm:text-sm">Sunday, July 20</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-800">Desert Adventure & Dead Sea</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <!-- Day 8: Monday -->
+                <div class="itinerary-item p-4 rounded-xl cursor-pointer flex items-center space-x-4" onclick="openModal('day8Modal')">
+                    <div class="flex-1">
+                        <p class="font-semibold text-gray-500 text-xs sm:text-sm">Monday, July 21</p>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-800">Final Day & Departure</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="bg-gray-100 p-6 text-center text-gray-500">
+            <p class="font-bold text-gray-700">Have a Wonderful Trip!</p>
+            <p class="text-sm mt-1">Your journey, perfectly planned.</p>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="day1Modal" class="modal"><div class="modal-content"><div class="modal-body"><span class="close-btn">&times;</span><h2 class="font-lora text-2xl md:text-3xl font-bold mb-4">Monday: Arrival in Jerusalem</h2><div class="mt-4"><div class="schedule-entry"><div class="schedule-time">2:25 PM</div><div class="schedule-details">Arrive at <a href="https://www.google.com/maps/search/?api=1&query=Ben+Gurion+Airport" target="_blank" class="location-link">TLV Airport</a></div></div><div class="schedule-entry"><div class="schedule-time">3:30 PM</div><div class="schedule-details">Pick up rental car at <a href="https://www.google.com/maps/search/?api=1&query=Avis+Ben+Gurion+Airport" target="_blank" class="location-link">Avis</a></div></div><div class="schedule-entry"><div class="schedule-time">5:00 PM</div><div class="schedule-details">Settle in at <a href="https://www.google.com/maps/search/?api=1&query=Jerusalem+Estates" target="_blank" class="location-link">Jerusalem Estates</a></div></div><div class="schedule-entry"><div class="schedule-time">7:00 PM</div><div class="schedule-details">Dinner: Falafel/Shawarma</div></div><div class="schedule-entry"><div class="schedule-time">8:00 PM</div><div class="schedule-details">Grocery Shopping</div></div><div class="schedule-entry"><div class="schedule-time">9:30 PM</div><div class="schedule-details">Visit the <a href="https://www.google.com/maps/search/?api=1&query=Western+Wall+Jerusalem" target="_blank" class="location-link">Kotel (Western Wall)</a></div></div></div></div></div></div>
+    <div id="day2Modal" class="modal"><div class="modal-content"><div class="modal-body"><span class="close-btn">&times;</span><h2 class="font-lora text-2xl md:text-3xl font-bold mb-4">Tuesday: Jerusalem & Bar Mitzvah</h2><div class="mt-4"><div class="schedule-entry"><div class="schedule-time">11:00 AM</div><div class="schedule-details">Shuk Tour in <a href="https://www.google.com/maps/search/?api=1&query=Mahane+Yehuda+Market+Jerusalem" target="_blank" class="location-link">Mahane Yehuda</a> / Geula</div></div><div class="schedule-entry"><div class="schedule-time">12:00 PM</div><div class="schedule-details">See the <a href="https://www.google.com/maps/search/?api=1&query=Chords+Bridge+Jerusalem" target="_blank" class="location-link">Train on the Bridge</a></div></div><div class="schedule-entry"><div class="schedule-time">1:00 PM</div><div class="schedule-details">Lunch with Meira at <a href="https://www.google.com/maps/search/?api=1&query=Waffle+Bar+Ramat+Eshkol" target="_blank" class="location-link">Waffle Bar</a></div></div><div class="schedule-entry"><div class="schedule-time">1:00 PM</div><div class="schedule-details">Visit <a href="https://www.google.com/maps/search/?api=1&query=Galita+Chocolate+Farm+Degania+Bet" target="_blank" class="location-link">Galita Chocolate Factory</a></div></div><div class="schedule-entry"><div class="schedule-time">5:45 PM</div><div class="schedule-details">Meet Rabbi Keleman at <a href="https://www.google.com/maps/search/?api=1&query=Zerakh+Barnett+St+10+Jerusalem" target="_blank" class="location-link">Zerakh Barnett St 10</a></div></div><div class="schedule-entry"><div class="schedule-time">8:30 PM</div><div class="schedule-details">Dinner at Mevaseret Bar Mitzvah</div></div><div class="schedule-entry"><div class="schedule-time">9:30 PM</div><div class="schedule-details">Visit <a href="https://www.google.com/maps/search/?api=1&query=Western+Wall+Jerusalem" target="_blank" class="location-link">Kotel</a> / <a href="https://www.google.com/maps/search/?api=1&query=Rachel's+Tomb" target="_blank" class="location-link">Kever Rochel</a></div></div></div></div></div></div>
+    <div id="day3Modal" class="modal"><div class="modal-content"><div class="modal-body"><span class="close-btn">&times;</span><h2 class="font-lora text-2xl md:text-3xl font-bold mb-4">Wednesday: Old City & Tower of David</h2><div class="mt-4"><div class="schedule-entry"><div class="schedule-time">9:00 AM</div><div class="schedule-details">Bar Mitzvah at the <a href="https://www.google.com/maps/search/?api=1&query=Western+Wall+Jerusalem" target="_blank" class="location-link">Kotel</a></div></div><div class="schedule-entry"><div class="schedule-time">10:00 AM</div><div class="schedule-details">3D Tour</div></div><div class="schedule-entry"><div class="schedule-time">11:00 AM</div><div class="schedule-details">Breakfast in the Old City</div></div><div class="schedule-entry"><div class="schedule-time">6:00 PM</div><div class="schedule-details">Dinner at the <a href="https://www.google.com/maps/search/?api=1&query=First+Station+Jerusalem" target="_blank" class="location-link">Old Train Station</a> or <a href="https://www.google.com/maps/search/?api=1&query=Mamilla+Mall+Jerusalem" target="_blank" class="location-link">Mamilla</a></div></div><div class="schedule-entry"><div class="schedule-time">8:30 PM</div><div class="schedule-details">Light Show at the <a href="https://www.google.com/maps/search/?api=1&query=Tower+of+David+Light+Show" target="_blank" class="location-link">Tower of David</a></div></div><div class="schedule-entry"><div class="schedule-time">9:15 PM</div><div class="schedule-details">Visit the <a href="https://www.google.com/maps/search/?api=1&query=Western+Wall+Jerusalem" target="_blank" class="location-link">Kotel</a></div></div></div></div></div></div>
+    <div id="day4Modal" class="modal"><div class="modal-content"><div class="modal-body"><span class="close-btn">&times;</span><h2 class="font-lora text-2xl md:text-3xl font-bold mb-4">Thursday: Journey to the North</h2><div class="mt-4"><div class="schedule-entry"><div class="schedule-time">9:00 AM</div><div class="schedule-details">Depart for the North</div></div><div class="schedule-entry"><div class="schedule-time">11:00 AM</div><div class="schedule-details">Explore <a href="https://www.google.com/maps/search/?api=1&query=Rosh+HaNikra+Grottoes" target="_blank" class="location-link">Rosh Hanikra Grottoes</a></div></div><div class="schedule-entry"><div class="schedule-time">1:45 PM</div><div class="schedule-details">Visit <a href="https://www.google.com/maps/search/?api=1&query=Tomb+of+Rabbi+Shimon+bar+Yochai+Meron" target="_blank" class="location-link">Kever Rashbi in Meron</a></div></div><div class="schedule-entry"><div class="schedule-time">4:00 PM</div><div class="schedule-details">Experience <a href="https://www.google.com/maps/search/?api=1&query=Kfar+Kedem" target="_blank" class="location-link">Kfar Kedem</a></div></div><div class="schedule-entry"><div class="schedule-time">6:30 PM</div><div class="schedule-details">Visit <a href="https://www.google.com/maps/search/?api=1&query=Tomb+of+Ramchal+Tiberias" target="_blank" class="location-link">Kever of the Ramchal</a></div></div><div class="schedule-entry"><div class="schedule-time">7:00 PM</div><div class="schedule-details">Dinner at <a href="https://www.google.com/maps/search/?api=1&query=Decks+Restaurant+Tiberias" target="_blank" class="location-link">Decks Restaurant</a> in Tiberias</div></div><div class="schedule-entry"><div class="schedule-time">9:00 PM</div><div class="schedule-details">Depart for Jerusalem</div></div></div></div></div></div>
+    <div id="day5Modal" class="modal"><div class="modal-content"><div class="modal-body"><span class="close-btn">&times;</span><h2 class="font-lora text-2xl md:text-3xl font-bold mb-4">Friday: Shabbat Preparations</h2><div class="mt-4"><div class="schedule-entry"><div class="schedule-time">10:00 AM</div><div class="schedule-details">Visit <a href="https://www.google.com/maps/search/?api=1&query=Rachel's+Tomb" target="_blank" class="location-link">Kever Rochel</a>, <a href="https://www.google.com/maps/search/?api=1&query=Beit+Shemesh+Cemetery" target="_blank" class="location-link">Bet Shemesh Cemetery</a>, or <a href="https://www.google.com/maps/search/?api=1&query=Tomo+Candy+Israel" target="_blank" class="location-link">ToMo Candy Factory</a></div></div><div class="schedule-entry"><div class="schedule-time">12:30 PM</div><div class="schedule-details">Explore <a href="https://www.google.com/maps/search/?api=1&query=Mahane+Yehuda+Market" target="_blank" class="location-link">Shuk Mahane Yehuda</a></div></div><div class="schedule-entry"><div class="schedule-time">1:00 PM</div><div class="schedule-details">Walk through <a href="https://www.google.com/maps/search/?api=1&query=Geula+Jerusalem" target="_blank" class="location-link">Geula/Meah Shearim</a></div></div><div class="schedule-entry"><div class="schedule-time">5:30 PM</div><div class="schedule-details">Get Ready for Shabbos</div></div></div></div></div></div>
+    <div id="day6Modal" class="modal"><div class="modal-content"><div class="modal-body"><span class="close-btn">&times;</span><h2 class="font-lora text-2xl md:text-3xl font-bold mb-4">Saturday: Shabbat in Jerusalem</h2><div class="mt-4 text-center p-8"><p class="text-xl">Shabbat Shalom! A day of rest and peace.</p></div></div></div></div>
+    <div id="day7Modal" class="modal"><div class="modal-content"><div class="modal-body"><span class="close-btn">&times;</span><h2 class="font-lora text-2xl md:text-3xl font-bold mb-4">Sunday: Desert Adventure & Dead Sea</h2><div class="mt-4"><div class="schedule-entry"><div class="schedule-time">9:45 AM</div><div class="schedule-details">Visit <a href="https://www.google.com/maps/search/?api=1&query=Mitzpe+Yeriho" target="_blank" class="location-link">Mitzpe Yericho</a></div></div><div class="schedule-entry"><div class="schedule-time">10:00 AM</div><div class="schedule-details">Jeeping Adventure</div></div><div class="schedule-entry"><div class="schedule-time">12:30 PM</div><div class="schedule-details">Camel Ride</div></div><div class="schedule-entry"><div class="schedule-time">1:45 PM</div><div class="schedule-details">Visit <a href="https://www.google.com/maps/search/?api=1&query=Masada+National+Park" target="_blank" class="location-link">Masada</a> (optional)</div></div><div class="schedule-entry"><div class="schedule-time">3:30 PM</div><div class="schedule-details">Float in the <a href="https://www.google.com/maps/search/?api=1&query=Dead+Sea" target="_blank" class="location-link">Dead Sea</a></div></div><div class="schedule-entry"><div class="schedule-time">8:00 PM</div><div class="schedule-details">Dinner at <a href="https://www.google.com/maps/search/?api=1&query=Pitmaster+Jerusalem" target="_blank" class="location-link">Pit Master</a> (<a href="https://www.google.com/search?q=Pitmaster+Jerusalem+reservation" target="_blank" class="location-link">Reservation</a>)</div></div><div class="schedule-entry"><div class="schedule-time">11:00 PM</div><div class="schedule-details">Optional visit to the <a href="https://www.google.com/maps/search/?api=1&query=Western+Wall+Jerusalem" target="_blank" class="location-link">Kotel</a></div></div></div></div></div></div>
+    <div id="day8Modal" class="modal"><div class="modal-content"><div class="modal-body"><span class="close-btn">&times;</span><h2 class="font-lora text-2xl md:text-3xl font-bold mb-4">Monday: Final Day & Departure</h2><div class="mt-4"><div class="schedule-entry"><div class="schedule-time">5:00 PM</div><div class="schedule-details">Final visit to the <a href="https://www.google.com/maps/search/?api=1&query=Western+Wall+Jerusalem" target="_blank" class="location-link">Kotel</a></div></div><div class="schedule-entry"><div class="schedule-time">8:30 PM</div><div class="schedule-details">Depart for the Airport</div></div><div class="schedule-entry"><div class="schedule-time">12:30 AM</div><div class="schedule-details">Depart from <a href="https://www.google.com/maps/search/?api=1&query=Ben+Gurion+Airport" target="_blank" class="location-link">TLV Airport</a></div></div><p class="mt-8 text-center font-semibold text-lg">Have a safe flight home!</p></div></div></div></div>
+
+    <script>
+        function openModal(modalId) {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if(modal.id !== modalId) {
+                   // modal.style.display = 'none';
+                }
+            });
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        document.querySelectorAll('.close-btn').forEach(btn => {
+            btn.onclick = function() {
+                this.closest('.modal').style.display = 'none';
+            }
+        });
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>
